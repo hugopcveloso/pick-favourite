@@ -16,7 +16,8 @@ export const toggleFavAction = (
 	episode: IEpisode
 ): IAction => {
 	const episodeInFav = state.favourites.includes(episode);
-	let dispatchObj: IAction = {
+
+	let dispatchObj: any = {
 		type: "ADD_FAV",
 		payload: episode,
 	};

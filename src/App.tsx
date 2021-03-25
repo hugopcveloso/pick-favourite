@@ -13,7 +13,10 @@ const App = () => {
 		<Router>
 			<GlobalStyles />
 			<StyledHeader>
-				<h1>Rick and Morty</h1>
+				<Link to="/">
+					<h1>Rick and Morty</h1>
+				</Link>
+
 				<div>
 					<Link to="/">Home</Link>
 					<Link to="/faves">Favourites: {state.favourites.length}</Link>
@@ -30,6 +33,7 @@ const App = () => {
 };
 
 const StyledHeader = styled.section`
+	z-index: 10;
 	display: flex;
 	width: 70vw;
 	margin: 0 auto;
@@ -40,6 +44,10 @@ const StyledHeader = styled.section`
 	padding: 30px;
 	position: sticky;
 	top: 0;
+	a {
+		text-decoration: none;
+		color: black;
+	}
 	h1 {
 		font-weight: bold;
 		font-size: 20px;
@@ -47,7 +55,7 @@ const StyledHeader = styled.section`
 	div {
 		display: flex;
 		a {
-			margin: 5px;
+			margin-left: 30px;
 		}
 	}
 `;

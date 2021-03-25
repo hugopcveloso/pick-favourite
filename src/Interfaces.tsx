@@ -17,7 +17,7 @@ export interface IEpisode {
 }
 export interface IAction {
 	type: string;
-	payload: IEpisode[];
+	payload: any;
 }
 
 export interface IState {

@@ -2,14 +2,40 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { IEpisode, IAction } from "./Interfaces";
 import { Store } from "./Store";
+import { motion } from "framer-motion";
+
+const container = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.1,
+			type: "tween",
+		},
+	},
+};
+
+const item = {
+	hidden: { opacity: 0 },
+	show: { opacity: 1 },
+};
 
 function EpisodesList({ store, episodes, toggleFavAction, favourites }: any) {
 	const { state, dispatch } = store;
 	return (
-		<StyledList>
+		<StyledList
+			as={motion.section}
+			variants={container as any}
+			initial="hidden"
+			animate="show"
+		>
 			{episodes.map((episode: IEpisode) => {
 				return (
-					<StyledItem key={episode.id}>
+					<StyledItem
+						as={motion.section}
+						variants={item as any}
+						key={episode.id}
+					>
 						<img
 							src={episode.image.medium}
 							alt={`Rick and Morty ${episode.name}`}
@@ -35,6 +61,10 @@ function EpisodesList({ store, episodes, toggleFavAction, favourites }: any) {
 
 export default EpisodesList;
 
+/**
+ * Styled Components
+ */
+
 const StyledList = styled.section`
 	justify-content: center;
 	display: flex;
@@ -49,11 +79,19 @@ const StyledItem = styled.section`
 		justify-content: space-between;
 	}
 `;
-interface ButtonType {
-	isFavourite: boolean;
-}
 
 const StyledButton = styled.button`
 	background-color: ${(props: ButtonType) =>
 		!props.isFavourite ? "white" : "lightgreen"};
 `;
+
+/**
+ * Local interfaces
+ */
+interface ButtonType {
+	isFavourite: boolean;
+}
+
+/**
+ * Animations
+ */
