@@ -1,23 +1,31 @@
 import React, { useContext, useEffect } from "react";
 import GlobalStyles from "./GlobalStyles/GlobalStyles";
-import EpisodeList from "./EpisodeList";
 import styled from "styled-components";
 import { Store } from "./Store";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Homepage from "./Homepage";
+import FavPage from "./FavPage";
+
 const App = () => {
 	const { state, dispatch } = useContext(Store);
 
 	return (
-		<React.Fragment>
+		<Router>
 			<GlobalStyles />
 			<StyledHeader>
 				<h1>Rick and Morty</h1>
 				<div>
-					<span>Pick your favourite episode: </span>
-					<span>{state.favourites.length}</span>
+					<Link to="/">Home</Link>
+					<Link to="/faves">Favourites: {state.favourites.length}</Link>
 				</div>
 			</StyledHeader>
-			<EpisodeList />
-		</React.Fragment>
+			<Route exact path="/">
+				<Homepage />
+			</Route>
+			<Route path="/Faves">
+				<FavPage />
+			</Route>
+		</Router>
 	);
 };
 
@@ -35,6 +43,12 @@ const StyledHeader = styled.section`
 	h1 {
 		font-weight: bold;
 		font-size: 20px;
+	}
+	div {
+		display: flex;
+		a {
+			margin: 5px;
+		}
 	}
 `;
 

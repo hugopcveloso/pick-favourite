@@ -17,10 +17,19 @@ export interface IEpisode {
 }
 export interface IAction {
 	type: string;
-	payload: any;
+	payload: IEpisode[];
 }
 
 export interface IState {
 	episodes: IEpisode[];
+	favourites: IEpisode[];
+}
+
+export type IDispatch = React.Dispatch<IAction>;
+
+export interface IEpisodeProps {
+	episodes: IEpisode[];
+	store: { state: IState; dispatch: IDispatch };
+	toggleFavAction: (state: IState, dispatch: any, episode: IEpisode) => IAction;
 	favourites: IEpisode[];
 }

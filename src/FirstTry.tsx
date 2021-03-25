@@ -41,26 +41,24 @@ const EpisodeList = () => {
 	return (
 		<StyledList>
 			{state.episodes.map((episode: IEpisode) => {
-				return (
-					<StyledItem key={episode.id}>
-						<img
-							src={episode.image.medium}
-							alt={`Rick and Morty ${episode.name}`}
-						/>
-						<div className="card__content">
-							<div>
-								Season: {episode.season} Number: {episode.number}
-							</div>
-							<StyledButton
-								isFavourite={state.favourites.includes(episode)}
-								type="button"
-								onClick={() => toggleFavAction(episode)}
-							>
-								{!state.favourites.includes(episode) ? "Fav" : "Unfav"}
-							</StyledButton>
+				<StyledItem key={episode.id}>
+					<img
+						src={episode.image.medium}
+						alt={`Rick and Morty ${episode.name}`}
+					/>
+					<div className="card__content">
+						<div>
+							Season: {episode.season} Number: {episode.number}
 						</div>
-					</StyledItem>
-				);
+						<StyledButton
+							isFavourite={state.favourites.includes(episode)}
+							type="button"
+							onClick={() => toggleFavAction(episode)}
+						>
+							{!state.favourites.includes(episode) ? "Fav" : "Unfav"}
+						</StyledButton>
+					</div>
+				</StyledItem>;
 			})}
 		</StyledList>
 	);
@@ -84,9 +82,6 @@ const StyledItem = styled.section`
 		justify-content: space-between;
 	}
 `;
-interface ButtonType {
-	isFavourite: boolean;
-}
 
 const StyledButton = styled.button`
 	background-color: ${(props: ButtonType) =>
@@ -96,5 +91,7 @@ const StyledButton = styled.button`
 /**
  * Interfaces
  */
-
+interface ButtonType {
+	isFavourite: boolean;
+}
 export default EpisodeList;
