@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import GlobalStyles from "./GlobalStyles/GlobalStyles";
 import styled from "styled-components";
 import { Store } from "./Store";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Homepage from "./Homepage";
 import FavPage from "./FavPage";
 
 const App = () => {
-	const { state, dispatch } = useContext(Store);
+	const { state } = useContext(Store);
 
 	return (
 		<Router>

@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { IEpisode, IAction, IState } from "./Interfaces";
+import { IAction, IState } from "./Interfaces";
 
 const initialState: IState = {
 	episodes: [],

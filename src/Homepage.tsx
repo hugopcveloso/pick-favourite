@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import styled from "styled-components";
 import { Store } from "./Store";
 import { IEpisodeProps } from "./Interfaces";
 import { toggleFavAction, fetchDataAction } from "./Actions";

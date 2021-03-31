@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { IEpisode, IAction } from "./Interfaces";
-import { Store } from "./Store";
+import { IEpisode } from "./Interfaces";
 import { motion } from "framer-motion";
 
 const container = {
@@ -22,6 +21,8 @@ const item = {
 
 function EpisodesList({ store, episodes, toggleFavAction, favourites }: any) {
 	const { state, dispatch } = store;
+	//Removing the filtered objects
+
 	return (
 		<StyledList
 			as={motion.section}
@@ -29,32 +30,34 @@ function EpisodesList({ store, episodes, toggleFavAction, favourites }: any) {
 			initial="hidden"
 			animate="show"
 		>
-			{episodes.map((episode: IEpisode) => {
-				return (
-					<StyledItem
-						as={motion.section}
-						variants={item as any}
-						key={episode.id}
-					>
-						<img
-							src={episode.image.medium}
-							alt={`Rick and Morty ${episode.name}`}
-						/>
-						<div className="card__content">
-							<div>
-								Season: {episode.season} Number: {episode.number}
+			{episodes.map(
+				(episode: IEpisode, index: number): JSX.Element => {
+					return (
+						<StyledItem
+							as={motion.section}
+							variants={item as any}
+							key={episode.id}
+						>
+							<img
+								src={episode.image?.medium}
+								alt={`Rick and Morty ${episode.name}`}
+							/>
+							<div className="card__content">
+								<div>
+									Season: {episode.season} Number: {episode.number}
+								</div>
+								<StyledButton
+									isFavourite={favourites.includes(episode)}
+									type="button"
+									onClick={() => toggleFavAction(state, dispatch, episode)}
+								>
+									{!favourites.includes(episode) ? "Fav" : "Unfav"}
+								</StyledButton>
 							</div>
-							<StyledButton
-								isFavourite={favourites.includes(episode)}
-								type="button"
-								onClick={() => toggleFavAction(state, dispatch, episode)}
-							>
-								{!favourites.includes(episode) ? "Fav" : "Unfav"}
-							</StyledButton>
-						</div>
-					</StyledItem>
-				);
-			})}
+						</StyledItem>
+					);
+				}
+			)}
 		</StyledList>
 	);
 }
